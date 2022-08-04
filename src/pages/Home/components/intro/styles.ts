@@ -5,6 +5,7 @@ export const IntroContainer = styled.div`
   align-items: stretch;
   gap: 2.5rem;
   padding-top: 3.875rem;
+  height: calc(100vh - 106px);
 
   h1 {
     color: ${(props) => props.theme['base-title']};
@@ -43,7 +44,7 @@ export const IntroContainer = styled.div`
 export const LeftSidePage = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 4rem;
 `
 
 const BaseIconContainer = styled.div`
