@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
 export const ListContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 `

@@ -24,10 +24,18 @@ const coffeeList = [
     description: 'Café expresso tradicional com espuma cremosa',
     price: '9.90',
     labels: ['tradicional'],
-    imgURL: 'src/assets/coffee-cards/Type=Cremoso.svg',
+    imgURL: 'src/assets/coffee-cards/Type=Expresso Cremoso.svg',
   },
   {
     id: 4,
+    title: 'Expresso Gelado',
+    description: 'Bebida preparada com café expresso e cubos de gelo',
+    price: '9.90',
+    labels: ['tradicional', 'gelado'],
+    imgURL: 'src/assets/coffee-cards/Type=Café Gelado.svg',
+  },
+  {
+    id: 5,
     title: 'Café com Leite',
     description: 'Meio a meio de expresso tradicional com leite vaporizado',
     price: '9.90',
@@ -35,7 +43,7 @@ const coffeeList = [
     imgURL: 'src/assets/coffee-cards/Type=Café com Leite.svg',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Latte',
     description:
       'Uma dose de café expresso com o dobro de leite e espuma cremosa',
@@ -44,7 +52,7 @@ const coffeeList = [
     imgURL: 'src/assets/coffee-cards/Type=Latte.svg',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Capuccino',
     description:
       'Bebida com canela feita de doses iguais de café, leite e espuma',
@@ -53,15 +61,24 @@ const coffeeList = [
     imgURL: 'src/assets/coffee-cards/Type=Capuccino.svg',
   },
   {
-    id: 7,
+    id: 8,
+    title: 'Macchiato',
+    description:
+      'Café expresso misturado com um pouco de leite quente e espuma',
+    price: '9.90',
+    labels: ['tradicional', 'com leite'],
+    imgURL: 'src/assets/coffee-cards/Type=Macchiato.svg',
+  },
+  {
+    id: 9,
     title: 'Mocaccino',
     description: 'Café expresso com calda de chocolate, pouco leite e espuma',
     price: '9.90',
     labels: ['tradicional', 'com leite'],
-    imgURL: 'src/assets/coffee-cards/Type=Mocaccino.svg',
+    imgURL: 'src/assets/coffee-cards/Type=Mochaccino.svg',
   },
   {
-    id: 8,
+    id: 10,
     title: 'Chocolate Quente',
     description: 'Bebida feita com chocolate dissolvido no leite quente e café',
     price: '9.90',
@@ -69,7 +86,7 @@ const coffeeList = [
     imgURL: 'src/assets/coffee-cards/Type=Chocolate Quente.svg',
   },
   {
-    id: 9,
+    id: 11,
     title: 'Cubano',
     description:
       'Drink gelado de café expresso com rum, creme de leite e hortelã',
@@ -78,7 +95,15 @@ const coffeeList = [
     imgURL: 'src/assets/coffee-cards/Type=Cubano.svg',
   },
   {
-    id: 10,
+    id: 12,
+    title: 'Havaiano',
+    description: 'Bebida adocicada preparada com café e leite de coco',
+    price: '9.90',
+    labels: ['especial'],
+    imgURL: 'src/assets/coffee-cards/Type=Havaiano.svg',
+  },
+  {
+    id: 13,
     title: 'Árabe',
     description: 'Bebida preparada com grãos de café árabe e especiarias',
     price: '9.90',
@@ -86,7 +111,7 @@ const coffeeList = [
     imgURL: 'src/assets/coffee-cards/Type=Árabe.svg',
   },
   {
-    id: 11,
+    id: 14,
     title: 'Irlandês',
     description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
     price: '9.90',
