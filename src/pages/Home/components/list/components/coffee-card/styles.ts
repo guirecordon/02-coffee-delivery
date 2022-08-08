@@ -79,6 +79,10 @@ export const Counter = styled.div`
   border-radius: 6px;
   color: ${(props) => props.theme.purple};
 
+  :hover {
+    color: ${(props) => props.theme['purple-dark']};
+  }
+
   span {
     color: ${(props) => props.theme['base-title']};
     padding: 0.25rem;
