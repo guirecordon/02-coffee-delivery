@@ -5,7 +5,11 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
 
+  position: fixed;
+  top: 0;
+  width: 70rem;
   padding: 2rem 0;
+  background: ${(props) => props.theme.background};
 
   nav {
     display: flex;
