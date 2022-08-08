@@ -1,5 +1,5 @@
 import { CoffeeCard } from './components/coffee-card'
-import { ListContainer } from './styles'
+import { ListContainer, ListTitle } from './styles'
 
 const coffeeList = [
   {
@@ -122,10 +122,13 @@ const coffeeList = [
 
 export function List() {
   return (
-    <ListContainer>
-      {coffeeList.map((coffee) => {
-        return <CoffeeCard key={coffee.id} {...coffee} />
-      })}
-    </ListContainer>
+    <>
+      <ListTitle>Nossos Cafés</ListTitle>
+      <ListContainer>
+        {coffeeList.map((coffee) => {
+          return <CoffeeCard key={coffee.id} {...coffee} />
+        })}
+      </ListContainer>
+    </>
   )
 }

@@ -8,6 +8,8 @@ import {
   Counter,
   BottomContainer,
   IconContainer,
+  BottomShopping,
+  LabelContainer,
 } from './styles'
 
 interface CoffeeListProps {
@@ -28,9 +30,11 @@ export function CoffeeCard({
   return (
     <CardContainer>
       <img src={imgURL} alt="" />
-      {labels.map((label) => (
-        <Labels key={label}>label</Labels>
-      ))}
+      <LabelContainer>
+        {labels.map((label) => (
+          <Labels key={label}>{label}</Labels>
+        ))}
+      </LabelContainer>
       <Title>{title}</Title>
       <Description>{description}</Description>
       <BottomContainer>
@@ -38,14 +42,14 @@ export function CoffeeCard({
           <span>R$ </span>
           {price}
         </Price>
-        <div>
+        <BottomShopping>
           <Counter>
             <Minus size={14} /> <span>1</span> <Plus size={14} />
           </Counter>
-        </div>
-        <IconContainer>
-          <ShoppingCart size={22} weight="fill" />
-        </IconContainer>
+          <IconContainer>
+            <ShoppingCart size={22} weight="fill" />
+          </IconContainer>
+        </BottomShopping>
       </BottomContainer>
     </CardContainer>
   )
