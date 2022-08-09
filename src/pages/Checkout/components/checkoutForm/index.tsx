@@ -3,8 +3,12 @@ import {
   CreditCard,
   CurrencyDollar,
   MapPinLine,
+  Minus,
   Money,
+  Plus,
+  Trash,
 } from 'phosphor-react'
+import { Counter } from '../../../Home/components/list/components/coffee-card/styles'
 import {
   FormInput,
   LineOneInput,
@@ -17,6 +21,17 @@ import {
   FormContainer,
   PaymentSelectionHolder,
   PaymentButton,
+  CheckoutButton,
+  CartItem,
+  ItemPrice,
+  CartItemCart,
+  CheckoutCartItemLeft,
+  CheckoutCartMid,
+  PriceItems,
+  PriceCheckoutSection,
+  PriceItemsTotal,
+  SubmitButton,
+  CheckoutBox,
 } from './styles'
 
 export function CheckoutForm() {
@@ -77,13 +92,62 @@ export function CheckoutForm() {
         </FormSection>
       </div>
       <div>
-        <div>
-          <h4>Cafés selecionados</h4>
-          <div>Confirmation card</div>
-          <div>Confirmation card</div>
-          <div>Price Confirmation</div>
-        </div>
-        <button>Confirmar pedido</button>
+        <h3>Cafés selecionados</h3>
+        <CheckoutBox>
+          <div>
+            <CartItemCart>
+              <CheckoutCartItemLeft>
+                <img src="src/assets/coffee-cards/Type=Mochaccino.svg" alt="" />
+                <CheckoutCartMid>
+                  <h4>Expresso Tradicional</h4>
+                  <CartItem>
+                    <Counter>
+                      <Minus size={14} /> <span>1</span> <Plus size={14} />
+                    </Counter>
+                    <CheckoutButton>
+                      <Trash size={16} color="#8047F8" />
+                      remover
+                    </CheckoutButton>
+                  </CartItem>
+                </CheckoutCartMid>
+              </CheckoutCartItemLeft>
+              <ItemPrice>R$ 9,90</ItemPrice>
+            </CartItemCart>
+            <CartItemCart>
+              <CheckoutCartItemLeft>
+                <img src="src/assets/coffee-cards/Type=Mochaccino.svg" alt="" />
+                <CheckoutCartMid>
+                  <h4>Expresso Tradicional</h4>
+                  <CartItem>
+                    <Counter>
+                      <Minus size={14} /> <span>1</span> <Plus size={14} />
+                    </Counter>
+                    <CheckoutButton>
+                      <Trash size={16} color="#8047F8" />
+                      remover
+                    </CheckoutButton>
+                  </CartItem>
+                </CheckoutCartMid>
+              </CheckoutCartItemLeft>
+              <ItemPrice>R$ 9,90</ItemPrice>
+            </CartItemCart>
+            <PriceCheckoutSection>
+              <PriceItems>
+                <p>Total de itens</p>
+                <span>R$ 29,70</span>
+              </PriceItems>
+              <PriceItems>
+                <p>Entrega</p>
+                <span>R$ 3,50</span>
+              </PriceItems>
+              <PriceItemsTotal>
+                <p>Total</p>
+                <span>R$ 33,20</span>
+              </PriceItemsTotal>
+            </PriceCheckoutSection>
+          </div>
+          <SubmitButton>Confirmar pedido</SubmitButton>
+        </CheckoutBox>
       </div>
     </FormContainer>
   )
