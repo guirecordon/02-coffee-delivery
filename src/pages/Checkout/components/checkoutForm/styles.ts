@@ -41,7 +41,7 @@ export const FormHeader = styled.header`
 const BaseInput = styled.input`
   height: 2.625rem;
   background: ${(props) => props.theme['base-input']};
-  color: ${(props) => props.theme['base-label']};
+  color: ${(props) => props.theme['base-text']};
   outline: none;
   border: solid 1px ${(props) => props.theme['base-button']};
   margin-bottom: 1rem;
@@ -100,6 +100,7 @@ export const PaymentButton = styled.div`
 
   padding: 1rem;
   background: ${(props) => props.theme['base-button']};
+  border: none;
   border-radius: 6px;
   color: ${(props) => props.theme['base-text']};
   font-size: 0.75rem;
@@ -111,11 +112,11 @@ export const PaymentButton = styled.div`
     position: absolute;
   }
 
-  :hover {
+  &:hover {
     background: ${(props) => props.theme['base-hover']};
   }
 
-  :focus {
+  &:focus {
     border: solid 1px ${(props) => props.theme.purple};
   }
 `
@@ -136,7 +137,7 @@ export const CheckoutButton = styled.button`
   border: none;
   border-radius: 6px;
 
-  :hover {
+  &:hover {
     background: ${(props) => props.theme['base-hover']};
   }
 `
@@ -212,7 +213,7 @@ export const SubmitButton = styled.button`
   width: 100%;
   cursor: pointer;
 
-  :hover {
+  &:hover {
     background: ${(props) => props.theme['yellow-dark']};
   }
 `
