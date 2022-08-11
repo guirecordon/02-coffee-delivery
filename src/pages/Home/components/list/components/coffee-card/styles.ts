@@ -7,7 +7,6 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  width: 16rem;
   padding: 0 1.25rem;
   border-radius: 2% 15% / 2% 15%;
   margin-bottom: 2.5rem;
@@ -67,21 +66,27 @@ export const Price = styled.div`
   }
 `
 
-export const CounterInput = styled.input`
-  position: relative;
+export const Counter = styled.div`
+  background: ${(props) => props.theme['base-button']};
 
-  ::-webkit-inner-spin-button,
-  ::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 0.25rem;
+
+  padding: 0 0.5rem;
+
+  border-radius: 6px;
+  color: ${(props) => props.theme.purple};
+
+  :hover {
+    color: ${(props) => props.theme['purple-dark']};
   }
 
-  -moz-appearance: textfield;
-  border: none;
-  background: ${(props) => props.theme['base-button']};
-  width: 72px;
-  padding-left: 2rem;
-  border-radius: 6px;
+  span {
+    color: ${(props) => props.theme['base-title']};
+    padding: 0.25rem;
+  }
 `
 
 export const BottomContainer = styled.div`
@@ -90,28 +95,9 @@ export const BottomContainer = styled.div`
   gap: 2rem;
   margin: 2rem 0;
 `
-export const BottomShopping = styled.form`
-  position: relative;
+export const BottomShopping = styled.div`
   display: flex;
   gap: 0.5rem;
-`
-
-export const PositionAbsoluteDiv = styled.div`
-  position: absolute;
-  top: 12px;
-  left: 8px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-
-  span {
-    color: ${(props) => props.theme['base-title']};
-    padding: 0.25rem;
-    font-size: 1rem;
-    line-height: 1.3;
-  }
 `
 
 export const IconContainer = styled.div`
