@@ -1,3 +1,4 @@
+import { useForm } from 'react-hook-form'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import {
   CardContainer,
@@ -5,11 +6,12 @@ import {
   Title,
   Description,
   Price,
-  Counter,
   BottomContainer,
   IconContainer,
   BottomShopping,
   LabelContainer,
+  CounterInput,
+  PositionAbsoluteDiv,
 } from './styles'
 
 interface CoffeeListProps {
@@ -27,6 +29,8 @@ export function CoffeeCard({
   labels,
   imgURL,
 }: CoffeeListProps) {
+  const { register, handleSubmit } = useForm()
+
   return (
     <CardContainer>
       <img src={imgURL} alt="" />
@@ -43,9 +47,16 @@ export function CoffeeCard({
           {price}
         </Price>
         <BottomShopping>
-          <Counter>
-            <Minus size={14} /> <span>1</span> <Plus size={14} />
-          </Counter>
+          <CounterInput
+            type="number"
+            placeholder="0"
+            {...register('counterInput')}
+          />
+          <PositionAbsoluteDiv>
+            <Minus size={16} color="#8047F8" />
+
+            <Plus size={16} color="#8047F8" />
+          </PositionAbsoluteDiv>
           <IconContainer>
             <ShoppingCart size={22} weight="fill" />
           </IconContainer>

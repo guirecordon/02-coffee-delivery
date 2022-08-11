@@ -8,7 +8,7 @@ import {
   Plus,
   Trash,
 } from 'phosphor-react'
-import { Counter } from '../../../Home/components/list/components/coffee-card/styles'
+import { CounterInput } from '../../../Home/components/list/components/coffee-card/styles'
 import {
   FormInput,
   LineOneInput,
@@ -101,9 +101,9 @@ export function CheckoutForm() {
                 <CheckoutCartMid>
                   <h4>Expresso Tradicional</h4>
                   <CartItem>
-                    <Counter>
+                    <CounterInput>
                       <Minus size={14} /> <span>1</span> <Plus size={14} />
-                    </Counter>
+                    </CounterInput>
                     <CheckoutButton>
                       <Trash size={16} color="#8047F8" />
                       remover
