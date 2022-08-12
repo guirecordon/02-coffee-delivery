@@ -19,6 +19,7 @@ interface CoffeeListProps {
   price: string
   labels: string[]
   imgURL: string
+  onAddOrder: (quantity: number, title: string, imgURL: string) => void
 }
 
 export function CoffeeCard({
@@ -27,6 +28,7 @@ export function CoffeeCard({
   price,
   labels,
   imgURL,
+  onAddOrder,
 }: CoffeeListProps) {
   const [itemQuantity, setItemQuantity] = useState(0)
 
@@ -61,7 +63,9 @@ export function CoffeeCard({
             <span>{itemQuantity}</span>{' '}
             <Plus size={14} onClick={handleAddCount} />
           </Counter>
-          <IconContainer>
+          <IconContainer
+            onClick={() => onAddOrder(itemQuantity, title, imgURL)}
+          >
             <ShoppingCart size={22} weight="fill" />
           </IconContainer>
         </BottomShopping>

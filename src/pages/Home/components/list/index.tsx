@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { CoffeeCard } from './components/coffee-card'
 import { ListContainer, ListTitle } from './styles'
 
@@ -120,13 +121,32 @@ const coffeeList = [
   },
 ]
 
+interface CartItem {
+  product: string
+  quantity: number
+  img: string
+}
+
 export function List() {
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
+
+  function handleAddOrder(quantity: number, title: string, imgURL: string) {
+    setCartItems([...cartItems, { product: title, quantity, img: imgURL }])
+    console.log(cartItems)
+  }
+
   return (
     <>
       <ListTitle>Nossos Cafés</ListTitle>
       <ListContainer>
         {coffeeList.map((coffee) => {
-          return <CoffeeCard key={coffee.id} {...coffee} />
+          return (
+            <CoffeeCard
+              key={coffee.id}
+              onAddOrder={handleAddOrder}
+              {...coffee}
+            />
+          )
         })}
       </ListContainer>
     </>
