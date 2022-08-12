@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useContext } from 'react'
+import { CartItemsContext } from '../../../../layouts/DefaultLayout'
 import { CoffeeCard } from './components/coffee-card'
 import { ListContainer, ListTitle } from './styles'
 
@@ -121,18 +122,11 @@ const coffeeList = [
   },
 ]
 
-interface CartItem {
-  product: string
-  quantity: number
-  img: string
-}
-
 export function List() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const { cartItems, setCartItems } = useContext(CartItemsContext)
 
   function handleAddOrder(quantity: number, title: string, imgURL: string) {
     setCartItems([...cartItems, { product: title, quantity, img: imgURL }])
-    console.log(cartItems)
   }
 
   return (
