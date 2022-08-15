@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { CartItemsContext } from '../../../../layouts/DefaultLayout'
+import { CartItemsContext } from '../../../../contexts/CartItemsContext'
 import { CoffeeCard } from './components/coffee-card'
 import { ListContainer, ListTitle } from './styles'
 

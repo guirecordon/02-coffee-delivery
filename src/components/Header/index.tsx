@@ -2,7 +2,7 @@ import { HeaderContainer, Location, LocationWrap, Pin } from './styles'
 import logo from '../../assets/Logo.svg'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { useContext, useEffect, useState } from 'react'
-import { CartItemsContext } from '../../layouts/DefaultLayout'
+import { CartItemsContext } from '../../contexts/CartItemsContext'
 import { NavLink } from 'react-router-dom'
 
 export function Header() {
