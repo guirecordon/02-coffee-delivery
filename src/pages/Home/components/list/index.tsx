@@ -126,7 +126,16 @@ export function List() {
   const { cartItems, setCartItems } = useContext(CartItemsContext)
 
   function handleAddOrder(quantity: number, title: string, imgURL: string) {
-    setCartItems([...cartItems, { product: title, quantity, img: imgURL }])
+    if (cartItems) {
+      const cleanArr = cartItems.filter((el: any) => {
+        return el.product !== title
+      })
+      setCartItems([...cleanArr, { product: title, quantity, img: imgURL }])
+    } else {
+      setCartItems([...cartItems, { product: title, quantity, img: imgURL }])
+    }
+
+    console.log(cartItems)
   }
 
   return (

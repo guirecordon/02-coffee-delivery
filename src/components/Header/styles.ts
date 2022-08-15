@@ -15,6 +15,24 @@ export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     gap: 0.75rem;
+
+    position: relative;
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: ${(props) => props.theme['yellow-dark']};
+      color: ${(props) => props.theme['yellow-light']};
+      font-size: 12px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      transform: translate(50%, -50%);
+    }
   }
 
   a {
