@@ -9,16 +9,22 @@ import {
   ItemPrice,
 } from './styles'
 
-export function CartItemCart() {
+interface CartItemsProps {
+  product: string
+  quantity: number
+  img: string
+}
+
+export function CartItemCart({ product, quantity, img }: CartItemsProps) {
   return (
     <CartItemCartContainer>
       <CheckoutCartItemLeft>
-        <img src="src/assets/coffee-cards/Type=Mochaccino.svg" alt="" />
+        <img src={img} alt="" />
         <CheckoutCartMid>
-          <h4>Expresso Tradicional</h4>
+          <h4>{product}</h4>
           <CartItem>
             <Counter>
-              <Minus size={14} /> <span>1</span> <Plus size={14} />
+              <Minus size={14} /> <span>{quantity}</span> <Plus size={14} />
             </Counter>
             <CheckoutButton>
               <Trash size={16} color="#8047F8" />

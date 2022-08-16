@@ -3,12 +3,10 @@ import {
   CreditCard,
   CurrencyDollar,
   MapPinLine,
-  Minus,
   Money,
-  Plus,
-  Trash,
 } from 'phosphor-react'
-import { Counter } from '../../../Home/components/list/components/coffee-card/styles'
+import { useContext } from 'react'
+import { CartItemsContext } from '../../../../contexts/CartItemsContext'
 import { CartItemCart } from './components/CartItemCart'
 import {
   FormInput,
@@ -30,6 +28,8 @@ import {
 } from './styles'
 
 export function CheckoutForm() {
+  const { cartItems } = useContext(CartItemsContext)
+
   return (
     <FormContainer>
       <div>
@@ -90,8 +90,10 @@ export function CheckoutForm() {
         <h3>Cafés selecionados</h3>
         <CheckoutBox>
           <div>
-            <CartItemCart />
-            <CartItemCart />
+            {cartItems.map((item: any) => (
+              <CartItemCart key={item.product} {...item} />
+            ))}
+
             <PriceCheckoutSection>
               <PriceItems>
                 <p>Total de itens</p>
