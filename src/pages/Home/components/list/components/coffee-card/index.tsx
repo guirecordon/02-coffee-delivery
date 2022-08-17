@@ -1,5 +1,6 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CartItemsContext } from '../../../../../../contexts/CartItemsContext'
 import {
   CardContainer,
   Labels,
@@ -38,16 +39,18 @@ export function CoffeeCard({
   imgURL,
   onAddOrder,
 }: CoffeeListProps) {
+  const { handleReduceCount, handleAddCount } = useContext(CartItemsContext)
+
   const [itemQuantity, setItemQuantity] = useState(0)
 
-  function handleReduceCount() {
-    if (itemQuantity > 0) {
-      setItemQuantity(itemQuantity - 1)
-    }
+  function onReduceCount() {
+    const newQuantity = handleReduceCount(itemQuantity)
+    setItemQuantity(newQuantity)
   }
 
-  function handleAddCount() {
-    setItemQuantity(itemQuantity + 1)
+  function onAddCount() {
+    const newQuantity = handleAddCount(itemQuantity)
+    setItemQuantity(newQuantity)
   }
 
   return (
@@ -67,9 +70,8 @@ export function CoffeeCard({
         </Price>
         <BottomShopping>
           <Counter>
-            <Minus size={14} onClick={handleReduceCount} />{' '}
-            <span>{itemQuantity}</span>{' '}
-            <Plus size={14} onClick={handleAddCount} />
+            <Minus size={14} onClick={onReduceCount} />{' '}
+            <span>{itemQuantity}</span> <Plus size={14} onClick={onAddCount} />
           </Counter>
           <IconContainer
             onClick={() => onAddOrder(id, itemQuantity, title, imgURL, price)}

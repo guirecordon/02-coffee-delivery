@@ -17,6 +17,16 @@ export function CartItemsContextProvider({
 }: CartItemsContextProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
 
+  function handleReduceCount(itemQuantity: number) {
+    if (itemQuantity > 0) {
+      return itemQuantity - 1
+    }
+  }
+
+  function handleAddCount(itemQuantity: number) {
+    return itemQuantity + 1
+  }
+
   useEffect(() => {
     const stateJSON = JSON.stringify(cartItems)
 
@@ -24,7 +34,14 @@ export function CartItemsContextProvider({
   }, [cartItems])
 
   return (
-    <CartItemsContext.Provider value={{ cartItems, setCartItems }}>
+    <CartItemsContext.Provider
+      value={{
+        cartItems,
+        setCartItems,
+        handleReduceCount,
+        handleAddCount,
+      }}
+    >
       {children}
     </CartItemsContext.Provider>
   )
