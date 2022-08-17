@@ -17,7 +17,7 @@ interface CoffeeListProps {
   id: number
   title: string
   description: string
-  price: number
+  price: string
   labels: string[]
   imgURL: string
   onAddOrder: (
@@ -25,7 +25,7 @@ interface CoffeeListProps {
     quantity: number,
     title: string,
     imgURL: string,
-    price: number,
+    price: string,
   ) => void
 }
 

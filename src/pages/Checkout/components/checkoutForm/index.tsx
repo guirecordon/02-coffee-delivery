@@ -32,7 +32,7 @@ export function CheckoutForm() {
   useEffect(() => {
     if (cartItems) {
       const total = cartItems.reduce((acc: any, currVal: any) => {
-        acc += currVal.price
+        acc += Number(currVal.price)
         return acc
       }, 0)
       setTotal(total)
