@@ -14,15 +14,23 @@ import {
 } from './styles'
 
 interface CoffeeListProps {
+  id: number
   title: string
   description: string
-  price: string
+  price: number
   labels: string[]
   imgURL: string
-  onAddOrder: (quantity: number, title: string, imgURL: string) => void
+  onAddOrder: (
+    id: number,
+    quantity: number,
+    title: string,
+    imgURL: string,
+    price: number,
+  ) => void
 }
 
 export function CoffeeCard({
+  id,
   title,
   description,
   price,
@@ -64,7 +72,7 @@ export function CoffeeCard({
             <Plus size={14} onClick={handleAddCount} />
           </Counter>
           <IconContainer
-            onClick={() => onAddOrder(itemQuantity, title, imgURL)}
+            onClick={() => onAddOrder(id, itemQuantity, title, imgURL, price)}
           >
             <ShoppingCart size={22} weight="fill" />
           </IconContainer>

@@ -121,28 +121,6 @@ export const PaymentButton = styled.div`
   }
 `
 
-const BasePriceItems = styled.div`
-  display: flex;
-  justify-content: space-between;
-  line-height: 1.3;
-  margin-top: 0.75rem;
-`
-
-export const PriceItems = styled(BasePriceItems)`
-  p {
-    font-size: 0.875rem;
-  }
-`
-
-export const PriceItemsTotal = styled(BasePriceItems)`
-  font-weight: bold;
-  font-size: 1.25rem;
-`
-
-export const PriceCheckoutSection = styled.div`
-  padding: 1rem 0;
-`
-
 export const SubmitButton = styled.button`
   margin-top: 1.5rem;
   background: ${(props) => props.theme.yellow};

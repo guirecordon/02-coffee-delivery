@@ -5,9 +5,10 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CartItemsContext } from '../../../../contexts/CartItemsContext'
 import { CartItemCart } from './components/CartItemCart'
+import { PriceCheckoutSection } from './components/PriceCheckoutSection'
 import {
   FormInput,
   LineOneInput,
@@ -20,15 +21,23 @@ import {
   FormContainer,
   PaymentSelectionHolder,
   PaymentButton,
-  PriceItems,
-  PriceCheckoutSection,
-  PriceItemsTotal,
   SubmitButton,
   CheckoutBox,
 } from './styles'
 
 export function CheckoutForm() {
   const { cartItems } = useContext(CartItemsContext)
+  const [total, setTotal] = useState(0)
+
+  useEffect(() => {
+    if (cartItems) {
+      const total = cartItems.reduce((acc: any, currVal: any) => {
+        acc += currVal.price
+        return acc
+      }, 0)
+      setTotal(total)
+    }
+  }, [cartItems])
 
   return (
     <FormContainer>
@@ -62,7 +71,8 @@ export function CheckoutForm() {
             <div>
               <h4>Pagamento</h4>
               <p>
-                O pagamento é feito na entrega. Escolha a forma que deseja pagar
+                O pagamento é feito na entrega. Escolha a forma que deseja
+                utilizar
               </p>
             </div>
           </FormHeader>
@@ -93,21 +103,7 @@ export function CheckoutForm() {
             {cartItems.map((item: any) => (
               <CartItemCart key={item.product} {...item} />
             ))}
-
-            <PriceCheckoutSection>
-              <PriceItems>
-                <p>Total de itens</p>
-                <span>R$ 29,70</span>
-              </PriceItems>
-              <PriceItems>
-                <p>Entrega</p>
-                <span>R$ 3,50</span>
-              </PriceItems>
-              <PriceItemsTotal>
-                <p>Total</p>
-                <span>R$ 33,20</span>
-              </PriceItemsTotal>
-            </PriceCheckoutSection>
+            <PriceCheckoutSection total={total} />
           </div>
           <SubmitButton>Confirmar pedido</SubmitButton>
         </CheckoutBox>
