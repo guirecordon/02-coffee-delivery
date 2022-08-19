@@ -1,45 +1,93 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import { createContext, ReactNode, useState } from 'react'
 
 interface CartItem {
-  product: string
+  id: number
   quantity: number
-  img: string
 }
 
 interface CartItemsContextProviderProps {
   children: ReactNode
 }
 
-export const CartItemsContext = createContext({} as any)
+type CartItemsContextType = {
+  cartItems: CartItem[]
+  getItemQuantity: (id: number) => number
+  increaseCartQuantity: (id: number) => void
+  decreaseCartQuantity: (id: number) => void
+  // addToCart: (id: number) => void
+}
+
+export const CartItemsContext = createContext({} as CartItemsContextType)
 
 export function CartItemsContextProvider({
   children,
 }: CartItemsContextProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
 
-  function handleReduceCount(itemQuantity: number) {
-    if (itemQuantity > 0) {
-      return itemQuantity - 1
+  function getItemQuantity(id: number) {
+    return cartItems.find((item) => item.id === id)?.quantity || 0
+  }
+
+  function increaseCartQuantity(id: number) {
+    const matchFound = cartItems.find((item) => item.id === id)
+
+    if (!matchFound) {
+      setCartItems([...cartItems, { id, quantity: 1 }])
+    } else {
+      const updatedItemsArr = cartItems.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: item.quantity + 1 }
+        } else {
+          return item
+        }
+      })
+      setCartItems(updatedItemsArr)
     }
   }
 
-  function handleAddCount(itemQuantity: number) {
-    return itemQuantity + 1
+  function decreaseCartQuantity(id: number) {
+    const matchFound = cartItems.find((item) => item.id === id)
+
+    if (matchFound && matchFound.quantity === 1) {
+      setCartItems(cartItems.filter((item) => item.id !== id))
+    } else {
+      const updatedItemsArr = cartItems.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: item.quantity - 1 }
+        } else {
+          return item
+        }
+      })
+      setCartItems(updatedItemsArr)
+    }
   }
 
-  useEffect(() => {
-    const stateJSON = JSON.stringify(cartItems)
+  // function handleReduceCount(itemQuantity: number) {
+  //   if (itemQuantity > 0) {
+  //     return itemQuantity - 1
+  //   }
+  // }
 
-    localStorage.setItem('@coffee-delivery:cart-items-1.0.0', stateJSON)
-  }, [cartItems])
+  // function handleAddCount(itemQuantity: number) {
+  //   return itemQuantity + 1
+  // }
+
+  // useEffect(() => {
+  //   const stateJSON = JSON.stringify(cartItems)
+
+  //   localStorage.setItem('@coffee-delivery:cart-items-1.0.0', stateJSON)
+  // }, [cartItems])
 
   return (
     <CartItemsContext.Provider
       value={{
         cartItems,
-        setCartItems,
-        handleReduceCount,
-        handleAddCount,
+        getItemQuantity,
+        increaseCartQuantity,
+        decreaseCartQuantity,
+        // setCartItems,
+        // handleReduceCount,
+        // handleAddCount,
       }}
     >
       {children}

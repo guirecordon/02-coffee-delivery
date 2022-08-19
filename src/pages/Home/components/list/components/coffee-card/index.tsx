@@ -1,5 +1,5 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { CartItemsContext } from '../../../../../../contexts/CartItemsContext'
 import {
   CardContainer,
@@ -21,13 +21,13 @@ interface CoffeeListProps {
   price: string
   labels: string[]
   imgURL: string
-  onAddOrder: (
-    id: number,
-    quantity: number,
-    title: string,
-    imgURL: string,
-    price: string,
-  ) => void
+  // onAddOrder: (
+  //   id: number,
+  //   quantity: number,
+  //   title: string,
+  //   imgURL: string,
+  //   price: string,
+  // ) => void
 }
 
 export function CoffeeCard({
@@ -37,21 +37,22 @@ export function CoffeeCard({
   price,
   labels,
   imgURL,
-  onAddOrder,
 }: CoffeeListProps) {
-  const { handleReduceCount, handleAddCount } = useContext(CartItemsContext)
+  const { decreaseCartQuantity, increaseCartQuantity, getItemQuantity } =
+    useContext(CartItemsContext)
+  const quantity = getItemQuantity(id)
 
-  const [itemQuantity, setItemQuantity] = useState(0)
+  // const [itemQuantity, setItemQuantity] = useState(0)
 
-  function onReduceCount() {
-    const newQuantity = handleReduceCount(itemQuantity)
-    setItemQuantity(newQuantity)
-  }
+  // function onReduceCount() {
+  //   const newQuantity = handleReduceCount(itemQuantity)
+  //   setItemQuantity(newQuantity)
+  // }
 
-  function onAddCount() {
-    const newQuantity = handleAddCount(itemQuantity)
-    setItemQuantity(newQuantity)
-  }
+  // function onAddCount() {
+  //   const newQuantity = handleAddCount(itemQuantity)
+  //   setItemQuantity(newQuantity)
+  // }
 
   return (
     <CardContainer>
@@ -70,11 +71,12 @@ export function CoffeeCard({
         </Price>
         <BottomShopping>
           <Counter>
-            <Minus size={14} onClick={onReduceCount} />{' '}
-            <span>{itemQuantity}</span> <Plus size={14} onClick={onAddCount} />
+            <Minus size={14} onClick={() => decreaseCartQuantity(id)} />{' '}
+            <span>{quantity}</span>{' '}
+            <Plus size={14} onClick={() => increaseCartQuantity(id)} />
           </Counter>
           <IconContainer
-            onClick={() => onAddOrder(id, itemQuantity, title, imgURL, price)}
+          // onClick={() => onAddOrder(id, itemQuantity, title, imgURL, price)}
           >
             <ShoppingCart size={22} weight="fill" />
           </IconContainer>
