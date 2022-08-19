@@ -1,24 +1,28 @@
 import { HeaderContainer, Location, LocationWrap, Pin } from './styles'
 import logo from '../../assets/Logo.svg'
 import { MapPin, ShoppingCart } from 'phosphor-react'
-import { useContext, useEffect, useState } from 'react'
-import { CartItemsContext } from '../../contexts/CartItemsContext'
+// import { useContext, useEffect, useState } from 'react'
+// import { CartItemsContext } from '../../contexts/CartItemsContext'
 import { NavLink } from 'react-router-dom'
+import { useContext } from 'react'
+import { CartItemsContext } from '../../contexts/CartItemsContext'
 
 export function Header() {
-  const { cartItems } = useContext(CartItemsContext)
-  const [cart, setCart] = useState(0)
+  const { cartQuantity } = useContext(CartItemsContext)
 
-  useEffect(() => {
-    if (cartItems) {
-      const newCart = cartItems.reduce((acc: any, currVal: any) => {
-        acc += currVal.quantity
-        return acc
-      }, 0)
+  // const { cartItems } = useContext(CartItemsContext)
+  // const [cart, setCart] = useState(0)
 
-      setCart(newCart)
-    }
-  }, [cartItems, cart])
+  // useEffect(() => {
+  //   if (cartItems) {
+  //     const newCart = cartItems.reduce((acc: any, currVal: any) => {
+  //       acc += currVal.quantity
+  //       return acc
+  //     }, 0)
+
+  //     setCart(newCart)
+  //   }
+  // }, [cartItems, cart])
 
   return (
     <HeaderContainer>
@@ -34,7 +38,7 @@ export function Header() {
         <NavLink to="/checkout">
           <ShoppingCart size={22} weight="fill" />
         </NavLink>
-        <span>{cart}</span>
+        <span>{cartQuantity}</span>
       </nav>
     </HeaderContainer>
   )

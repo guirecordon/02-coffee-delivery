@@ -38,8 +38,12 @@ export function CoffeeCard({
   labels,
   imgURL,
 }: CoffeeListProps) {
-  const { decreaseCartQuantity, increaseCartQuantity, getItemQuantity } =
-    useContext(CartItemsContext)
+  const {
+    decreaseCartQuantity,
+    increaseCartQuantity,
+    getItemQuantity,
+    updateCartQuantity,
+  } = useContext(CartItemsContext)
   const quantity = getItemQuantity(id)
 
   // const [itemQuantity, setItemQuantity] = useState(0)
@@ -75,9 +79,7 @@ export function CoffeeCard({
             <span>{quantity}</span>{' '}
             <Plus size={14} onClick={() => increaseCartQuantity(id)} />
           </Counter>
-          <IconContainer
-          // onClick={() => onAddOrder(id, itemQuantity, title, imgURL, price)}
-          >
+          <IconContainer onClick={() => updateCartQuantity()}>
             <ShoppingCart size={22} weight="fill" />
           </IconContainer>
         </BottomShopping>

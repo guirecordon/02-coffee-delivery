@@ -14,7 +14,8 @@ type CartItemsContextType = {
   getItemQuantity: (id: number) => number
   increaseCartQuantity: (id: number) => void
   decreaseCartQuantity: (id: number) => void
-  // addToCart: (id: number) => void
+  updateCartQuantity: () => void
+  cartQuantity: number
 }
 
 export const CartItemsContext = createContext({} as CartItemsContextType)
@@ -23,6 +24,15 @@ export function CartItemsContextProvider({
   children,
 }: CartItemsContextProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [cartQuantity, setCartQuantity] = useState(0)
+
+  function updateCartQuantity() {
+    const updtQuantity = cartItems.reduce(
+      (total, currItem) => (total += currItem.quantity),
+      0,
+    )
+    setCartQuantity(updtQuantity)
+  }
 
   function getItemQuantity(id: number) {
     return cartItems.find((item) => item.id === id)?.quantity || 0
@@ -85,6 +95,8 @@ export function CartItemsContextProvider({
         getItemQuantity,
         increaseCartQuantity,
         decreaseCartQuantity,
+        cartQuantity,
+        updateCartQuantity,
         // setCartItems,
         // handleReduceCount,
         // handleAddCount,
