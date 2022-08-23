@@ -27,11 +27,9 @@ export function CartItemsContextProvider({
   const [cartQuantity, setCartQuantity] = useState(0)
 
   function updateCartQuantity() {
-    const updtQuantity = cartItems.reduce(
-      (total, currItem) => (total += currItem.quantity),
-      0,
+    setCartQuantity(() =>
+      cartItems.reduce((total, currItem) => (total += currItem.quantity), 0),
     )
-    setCartQuantity(updtQuantity)
   }
 
   function getItemQuantity(id: number) {

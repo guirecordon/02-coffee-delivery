@@ -1,4 +1,6 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
+import { useContext, useEffect } from 'react'
+import { CartItemsContext } from '../../../../../../contexts/CartItemsContext'
 import coffeeList from '../../../../../../data/coffeeList.json'
 import { Counter } from '../../../../../Home/components/list/components/coffee-card/styles'
 import {
@@ -15,16 +17,18 @@ interface CartItemsProps {
   quantity: number
 }
 
-// interface checkoutItemProps {
-//   id: number
-//   title: string
-//   description: string
-//   price: string
-//   labels: string[]
-//   imgURL: string
-// }
-
 export function CartItemCart({ id, quantity }: CartItemsProps) {
+  const {
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    updateCartQuantity,
+    cartQuantity,
+  } = useContext(CartItemsContext)
+
+  useEffect(() => {
+    updateCartQuantity()
+  }, [cartQuantity, updateCartQuantity])
+
   const checkoutItem = coffeeList.find((item: any) => {
     return item.id === id
   })
@@ -40,7 +44,9 @@ export function CartItemCart({ id, quantity }: CartItemsProps) {
             <h4>{checkoutItem?.title}</h4>
             <CartItem>
               <Counter>
-                <Minus size={14} /> <span>{quantity}</span> <Plus size={14} />
+                <Minus size={14} onClick={() => decreaseCartQuantity(id)} />{' '}
+                <span>{quantity}</span>{' '}
+                <Plus size={14} onClick={() => increaseCartQuantity(id)} />
               </Counter>
               <CheckoutButton>
                 <Trash size={16} color="#8047F8" />
