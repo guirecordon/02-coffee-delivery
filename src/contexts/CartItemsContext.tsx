@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from 'react'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 interface CartItem {
   id: number
@@ -23,7 +24,10 @@ export const CartItemsContext = createContext({} as CartItemsContextType)
 export function CartItemsContextProvider({
   children,
 }: CartItemsContextProviderProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
+    '@coffee-delivery:cart-items-1.0.0',
+    [],
+  )
   const [cartQuantity, setCartQuantity] = useState(0)
 
   function updateCartQuantity() {
