@@ -5,7 +5,8 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { CartItemsContext } from '../../../../contexts/CartItemsContext'
 import { CartItemCart } from './components/CartItemCart'
 import { PriceCheckoutSection } from './components/PriceCheckoutSection'
 import {
@@ -25,28 +26,8 @@ import {
 } from './styles'
 
 export function CheckoutForm() {
-  // const { cartItems } = useContext(CartItemsContext)
-  const [total, setTotal] = useState(0)
-  const [cartItems, setCartItems] = useState([])
-
-  useEffect(() => {
-    const storedItems = localStorage.getItem(
-      '@coffee-delivery:cart-items-1.0.0',
-    )
-
-    console.log(storedItems)
-
-    if (storedItems) {
-      const cartItems = JSON.parse(storedItems)
-
-      const total = cartItems.reduce((acc: any, currVal: any) => {
-        acc += Number(currVal.price)
-        return acc
-      }, 0)
-      setTotal(total)
-      setCartItems(cartItems)
-    }
-  }, [])
+  const { cartItems } = useContext(CartItemsContext)
+  console.log(cartItems)
 
   return (
     <FormContainer>
@@ -110,9 +91,9 @@ export function CheckoutForm() {
         <CheckoutBox>
           <div>
             {cartItems.map((item: any) => (
-              <CartItemCart key={item.product} {...item} />
+              <CartItemCart key={item.id} {...item} />
             ))}
-            <PriceCheckoutSection total={total} />
+            <PriceCheckoutSection total={0} />
           </div>
           <SubmitButton>Confirmar pedido</SubmitButton>
         </CheckoutBox>
