@@ -26,8 +26,7 @@ import {
 } from './styles'
 
 export function CheckoutForm() {
-  const { cartItems } = useContext(CartItemsContext)
-  console.log(cartItems)
+  const { cartItems, getTotal } = useContext(CartItemsContext)
 
   return (
     <FormContainer>
@@ -90,10 +89,11 @@ export function CheckoutForm() {
         <h3>Cafés selecionados</h3>
         <CheckoutBox>
           <div>
-            {cartItems.map((item: any) => (
-              <CartItemCart key={item.id} {...item} />
-            ))}
-            <PriceCheckoutSection total={0} />
+            {cartItems &&
+              cartItems.map((item: any) => (
+                <CartItemCart key={item.id} {...item} />
+              ))}
+            <PriceCheckoutSection />
           </div>
           <SubmitButton>Confirmar pedido</SubmitButton>
         </CheckoutBox>

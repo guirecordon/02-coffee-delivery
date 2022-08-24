@@ -22,12 +22,12 @@ export function CartItemCart({ id, quantity }: CartItemsProps) {
     increaseCartQuantity,
     decreaseCartQuantity,
     updateCartQuantity,
-    cartQuantity,
+    cartItems,
   } = useContext(CartItemsContext)
 
   useEffect(() => {
     updateCartQuantity()
-  }, [cartQuantity, updateCartQuantity])
+  }, [cartItems, updateCartQuantity])
 
   const checkoutItem = coffeeList.find((item: any) => {
     return item.id === id
