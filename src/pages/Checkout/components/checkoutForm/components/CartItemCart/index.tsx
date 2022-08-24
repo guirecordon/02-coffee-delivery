@@ -23,6 +23,7 @@ export function CartItemCart({ id, quantity }: CartItemsProps) {
     decreaseCartQuantity,
     updateCartQuantity,
     cartItems,
+    removeItem,
   } = useContext(CartItemsContext)
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export function CartItemCart({ id, quantity }: CartItemsProps) {
                 <span>{quantity}</span>{' '}
                 <Plus size={14} onClick={() => increaseCartQuantity(id)} />
               </Counter>
-              <CheckoutButton>
+              <CheckoutButton onClick={() => removeItem(id)}>
                 <Trash size={16} color="#8047F8" />
                 remover
               </CheckoutButton>

@@ -28,11 +28,12 @@ export const CartItem = styled.div`
   gap: 0.5rem;
 `
 
-export const CheckoutButton = styled.button`
+export const CheckoutButton = styled.div`
   background: ${(props) => props.theme['base-button']};
   color: ${(props) => props.theme['base-text']};
   text-transform: uppercase;
   font-size: 0.75rem;
+  cursor: pointer;
 
   display: flex;
   align-items: center;

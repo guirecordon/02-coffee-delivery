@@ -16,6 +16,7 @@ type CartItemsContextType = {
   increaseCartQuantity: (id: number) => void
   decreaseCartQuantity: (id: number) => void
   updateCartQuantity: () => void
+  removeItem: (id: number) => void
   cartQuantity: number
 }
 
@@ -74,6 +75,12 @@ export function CartItemsContextProvider({
     }
   }
 
+  function removeItem(id: number) {
+    setCartItems((currItems) => {
+      return currItems.filter((item) => item.id !== id)
+    })
+  }
+
   return (
     <CartItemsContext.Provider
       value={{
@@ -83,9 +90,7 @@ export function CartItemsContextProvider({
         decreaseCartQuantity,
         cartQuantity,
         updateCartQuantity,
-        // setCartItems,
-        // handleReduceCount,
-        // handleAddCount,
+        removeItem,
       }}
     >
       {children}
