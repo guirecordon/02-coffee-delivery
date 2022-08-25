@@ -5,10 +5,6 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { useContext } from 'react'
-import { CartItemsContext } from '../../../../contexts/CartItemsContext'
-import { CartItemCart } from './components/CartItemCart'
-import { PriceCheckoutSection } from './components/PriceCheckoutSection'
 import {
   FormInput,
   LineOneInput,
@@ -23,13 +19,27 @@ import {
   PaymentButton,
   SubmitButton,
   CheckoutBox,
+  RadioInput,
+  AddBorderComponent,
 } from './styles'
+import { useContext } from 'react'
+import { CartItemsContext } from '../../../../contexts/CartItemsContext'
+import { CartItemCart } from './components/CartItemCart'
+import { PriceCheckoutSection } from './components/PriceCheckoutSection'
+import { useForm } from 'react-hook-form'
 
 export function CheckoutForm() {
-  const { cartItems, getTotal } = useContext(CartItemsContext)
+  const { cartItems } = useContext(CartItemsContext)
+  const { register, handleSubmit, watch } = useForm()
+
+  function handlePostNewOrder(data: any) {
+    console.log(data)
+  }
+
+  const radioInput = watch('paymentMethod')
 
   return (
-    <FormContainer>
+    <FormContainer onSubmit={handleSubmit(handlePostNewOrder)}>
       <div>
         <h3>Complete seu pedido</h3>
         <FormSection>
@@ -40,17 +50,29 @@ export function CheckoutForm() {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
           </FormHeader>
-          <ZipInput type="number" placeholder="CEP" />
-          <StreetInput type="text" placeholder="Rua" />
+          <ZipInput type="number" placeholder="CEP" {...register('zipcode')} />
+          <StreetInput type="text" placeholder="Rua" {...register('street')} />
           <LineOneInput>
-            <FormInput type="number" placeholder="Número" />
-            <FormInput type="text" placeholder="Complemento" />
+            <FormInput
+              type="number"
+              placeholder="Número"
+              {...register('number')}
+            />
+            <FormInput
+              type="text"
+              placeholder="Complemento"
+              {...register('complement')}
+            />
             <OptionalTag>Opcional</OptionalTag>
           </LineOneInput>
           <LineTwoInput>
-            <FormInput type="text" placeholder="Bairro" />
-            <FormInput type="text" placeholder="Cidade" />
-            <FormInput type="text" placeholder="UF" />
+            <FormInput
+              type="text"
+              placeholder="Bairro"
+              {...register('district')}
+            />
+            <FormInput type="text" placeholder="Cidade" {...register('city')} />
+            <FormInput type="text" placeholder="UF" {...register('state')} />
           </LineTwoInput>
         </FormSection>
         <FormSection>
@@ -67,20 +89,35 @@ export function CheckoutForm() {
           </FormHeader>
           <PaymentSelectionHolder>
             <PaymentButton>
-              <input type="radio" value="credit" />
+              {radioInput === 'credit' && <AddBorderComponent />}
+              <RadioInput
+                type="radio"
+                value="credit"
+                {...register('paymentMethod')}
+              />
               <CreditCard size={16} color="#8047F8" />
-              <label htmlFor="credit">Cartão de Crédito</label>
+              Cartão de Crédito
             </PaymentButton>
             <PaymentButton>
-              <input type="radio" value="debit" />
+              {radioInput === 'debit' && <AddBorderComponent />}
+              <RadioInput
+                type="radio"
+                value="debit"
+                {...register('paymentMethod')}
+              />
               <Bank size={16} color="#8047F8" />
-              <label htmlFor="debit">Cartão de Débito</label>
+              Cartão de Débito
             </PaymentButton>{' '}
             <PaymentButton>
-              <input type="radio" value="cash" />
+              {radioInput === 'cash' && <AddBorderComponent />}
+              <RadioInput
+                type="radio"
+                value="cash"
+                {...register('paymentMethod')}
+              />
               <Money size={16} color="#8047F8" />
-
-              <label htmlFor="cash">Dinheiro</label>
+              Dinheiro
+              <label htmlFor="cash"></label>
             </PaymentButton>
           </PaymentSelectionHolder>
         </FormSection>

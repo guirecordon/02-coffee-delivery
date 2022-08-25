@@ -90,7 +90,14 @@ export const PaymentSelectionHolder = styled.div`
   display: flex;
   gap: 0.75rem;
 `
-export const PaymentButton = styled.div`
+
+export const RadioInput = styled.input`
+  display: none;
+`
+
+export const PaymentButton = styled.label`
+  position: relative;
+
   flex: 1;
 
   display: flex;
@@ -100,25 +107,24 @@ export const PaymentButton = styled.div`
 
   padding: 1rem;
   background: ${(props) => props.theme['base-button']};
-  border: none;
   border-radius: 6px;
   color: ${(props) => props.theme['base-text']};
   font-size: 0.75rem;
   font-weight: 400;
   text-transform: uppercase;
-
-  input {
-    left: -999rem;
-    position: absolute;
-  }
+  cursor: pointer;
 
   &:hover {
     background: ${(props) => props.theme['base-hover']};
   }
+`
 
-  &:focus {
-    border: solid 1px ${(props) => props.theme.purple};
-  }
+export const AddBorderComponent = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  border: 1px solid ${(props) => props.theme.purple};
 `
 
 export const SubmitButton = styled.button`
