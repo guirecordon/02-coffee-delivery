@@ -52,12 +52,15 @@ type FormData = zod.infer<typeof checkoutFormValidationSchema>
 
 export function CheckoutForm() {
   const { cartItems } = useContext(CartItemsContext)
-  const { register, handleSubmit, watch, formState } = useForm<FormData>({
-    resolver: zodResolver(checkoutFormValidationSchema),
-  })
+  const { register, handleSubmit, watch, formState, reset } = useForm<FormData>(
+    {
+      resolver: zodResolver(checkoutFormValidationSchema),
+    },
+  )
 
   function handlePostNewOrder(data: FormData) {
     console.log(data)
+    reset()
   }
 
   console.log(formState.errors)
