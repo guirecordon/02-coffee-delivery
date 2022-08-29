@@ -45,15 +45,18 @@ const checkoutFormValidationSchema = zod.object({
     .string()
     .min(2, 'Prencha com um UF válido')
     .max(2, 'Prencha com um UF válido'),
+  paymentMethod: zod.string(),
 })
+
+type FormData = zod.infer<typeof checkoutFormValidationSchema>
 
 export function CheckoutForm() {
   const { cartItems } = useContext(CartItemsContext)
-  const { register, handleSubmit, watch, formState } = useForm({
+  const { register, handleSubmit, watch, formState } = useForm<FormData>({
     resolver: zodResolver(checkoutFormValidationSchema),
   })
 
-  function handlePostNewOrder(data: any) {
+  function handlePostNewOrder(data: FormData) {
     console.log(data)
   }
 
