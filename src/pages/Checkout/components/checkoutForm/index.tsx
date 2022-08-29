@@ -27,14 +27,37 @@ import { CartItemsContext } from '../../../../contexts/CartItemsContext'
 import { CartItemCart } from './components/CartItemCart'
 import { PriceCheckoutSection } from './components/PriceCheckoutSection'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
+const checkoutFormValidationSchema = zod.object({
+  zipcode: zod
+    .string()
+    .min(8, 'Informe um CEP válido')
+    .max(8, 'Informe um CEP válido'),
+  street: zod.string(),
+  number: zod.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
+    message: 'Campo numérico obrigatório',
+  }),
+  district: zod.string().min(2, 'Campo obrigatório'),
+  city: zod.string().min(2, 'Campo obrigatório'),
+  state: zod
+    .string()
+    .min(2, 'Prencha com um UF válido')
+    .max(2, 'Prencha com um UF válido'),
+})
 
 export function CheckoutForm() {
   const { cartItems } = useContext(CartItemsContext)
-  const { register, handleSubmit, watch } = useForm()
+  const { register, handleSubmit, watch, formState } = useForm({
+    resolver: zodResolver(checkoutFormValidationSchema),
+  })
 
   function handlePostNewOrder(data: any) {
     console.log(data)
   }
+
+  console.log(formState.errors)
 
   const radioInput = watch('paymentMethod')
 
@@ -50,11 +73,21 @@ export function CheckoutForm() {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
           </FormHeader>
-          <ZipInput type="number" placeholder="CEP" {...register('zipcode')} />
+          <ZipInput
+            type="string"
+            placeholder="CEP"
+            {...register('zipcode', {
+              pattern: /[0-9]{8}/,
+            })}
+          />
+          {formState.errors.zipcode && (
+            <p>{formState.errors.zipcode.message}</p>
+          )}
           <StreetInput type="text" placeholder="Rua" {...register('street')} />
           <LineOneInput>
             <FormInput
               type="number"
+              min="0"
               placeholder="Número"
               {...register('number')}
             />
@@ -71,8 +104,13 @@ export function CheckoutForm() {
               placeholder="Bairro"
               {...register('district')}
             />
+            {formState.errors.district && (
+              <p>{formState.errors.district.message}</p>
+            )}
             <FormInput type="text" placeholder="Cidade" {...register('city')} />
+            {formState.errors.city && <p>{formState.errors.city.message}</p>}
             <FormInput type="text" placeholder="UF" {...register('state')} />
+            {formState.errors.state && <p>{formState.errors.state.message}</p>}
           </LineTwoInput>
         </FormSection>
         <FormSection>
