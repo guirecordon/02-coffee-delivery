@@ -28,6 +28,7 @@ type CartItemsContextType = {
   decreaseCartQuantity: (id: number) => void
   updateCartQuantity: () => void
   removeItem: (id: number) => void
+  resetCartItems: () => void
   cartQuantity: number
   deliveryInfo: FormData | null
 }
@@ -43,6 +44,10 @@ export function CartItemsContextProvider({
   )
   const [cartQuantity, setCartQuantity] = useState(0)
   const [deliveryInfo, setDeliveryInfo] = useState<FormData | null>(null)
+
+  function resetCartItems() {
+    setCartItems([])
+  }
 
   function getDeliveryInfo(data: FormData) {
     setDeliveryInfo(data)
@@ -110,6 +115,7 @@ export function CartItemsContextProvider({
         removeItem,
         deliveryInfo,
         getDeliveryInfo,
+        resetCartItems,
       }}
     >
       {children}

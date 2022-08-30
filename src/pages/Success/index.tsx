@@ -26,17 +26,6 @@ export function Success() {
           <FakeGradientBorder>
             <WrapOfAllBullets>
               <BulletWrap>
-                <MapPinWrapper>
-                  <MapPin size={16} color="#fff" weight="fill" />
-                </MapPinWrapper>
-                <div>
-                  <p>Previsão de entrega</p>
-                  <p>
-                    <strong>20 min - 30 min</strong>
-                  </p>
-                </div>
-              </BulletWrap>
-              <BulletWrap>
                 <TimerPinWrapper>
                   <Timer size={16} color="#fff" weight="fill" />
                 </TimerPinWrapper>
@@ -53,6 +42,18 @@ export function Success() {
                   </p>
                 </div>
               </BulletWrap>
+              <BulletWrap>
+                <MapPinWrapper>
+                  <MapPin size={16} color="#fff" weight="fill" />
+                </MapPinWrapper>
+                <div>
+                  <p>Previsão de entrega</p>
+                  <p>
+                    <strong>20 min - 30 min</strong>
+                  </p>
+                </div>
+              </BulletWrap>
+
               <BulletWrap>
                 <DollarPinWrapper>
                   <CurrencyDollar size={16} color="#fff" weight="fill" />
