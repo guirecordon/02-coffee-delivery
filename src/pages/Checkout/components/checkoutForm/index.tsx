@@ -22,15 +22,16 @@ import {
   RadioInput,
   AddBorderComponent,
   ErrorMessage,
+  EmptyCartMessage,
 } from './styles'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { CartItemsContext } from '../../../../contexts/CartItemsContext'
 import { CartItemCart } from './components/CartItemCart'
 import { PriceCheckoutSection } from './components/PriceCheckoutSection'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const checkoutFormValidationSchema = zod.object({
   zipcode: zod
@@ -189,10 +190,17 @@ export function CheckoutForm() {
         <h3>Cafés selecionados</h3>
         <CheckoutBox>
           <div>
-            {cartItems &&
+            {cartItems.length > 0 ? (
               cartItems.map((item: any) => (
                 <CartItemCart key={item.id} {...item} />
-              ))}
+              ))
+            ) : (
+              <EmptyCartMessage>
+                Seu carrinho está vazio. <br />
+                Clique <NavLink to="/">aqui</NavLink> para retornar à lista de
+                produtos
+              </EmptyCartMessage>
+            )}
             <PriceCheckoutSection />
           </div>
           <SubmitButton>Confirmar pedido</SubmitButton>

@@ -156,3 +156,16 @@ export const ErrorMessage = styled.p`
   color: ${(props) => props.theme['yellow-dark']};
   font-size: 0.75rem;
 `
+
+export const EmptyCartMessage = styled.div`
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: ${(props) => props.theme['purple-dark']};
+
+  a {
+    font-weight: bold;
+    color: ${(props) => props.theme.purple};
+  }
+`
