@@ -43,8 +43,11 @@ export function CartItemsContextProvider({
     '@coffee-delivery:cart-items-1.0.0',
     [],
   )
+  const [deliveryInfo, setDeliveryInfo] = useLocalStorage<FormData>(
+    '@coffee-delivery:delivery-info-1.0.0',
+    {},
+  )
   const [cartQuantity, setCartQuantity] = useState(0)
-  const [deliveryInfo, setDeliveryInfo] = useState<FormData | null>(null)
 
   function resetCartItems() {
     setCartItems([])

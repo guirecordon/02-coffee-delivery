@@ -55,11 +55,19 @@ const checkoutFormValidationSchema = zod.object({
 type FormData = zod.infer<typeof checkoutFormValidationSchema>
 
 export function CheckoutForm() {
-  const { cartItems, getDeliveryInfo, resetCartItems, zeroCartQuantity } =
-    useContext(CartItemsContext)
+  const {
+    cartItems,
+    getDeliveryInfo,
+    resetCartItems,
+    zeroCartQuantity,
+    deliveryInfo,
+  } = useContext(CartItemsContext)
   const { register, handleSubmit, watch, formState, reset } = useForm<FormData>(
     {
       resolver: zodResolver(checkoutFormValidationSchema),
+      defaultValues: {
+        zipcode: deliveryInfo?.zipcode,
+      },
     },
   )
 
@@ -77,6 +85,7 @@ export function CheckoutForm() {
   }
 
   const radioInput = watch('paymentMethod')
+  const zip = watch('zipcode')
 
   return (
     <FormContainer onSubmit={handleSubmit(handlePostNewOrder)}>
