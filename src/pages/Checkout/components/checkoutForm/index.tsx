@@ -29,6 +29,7 @@ import { PriceCheckoutSection } from './components/PriceCheckoutSection'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
+import { useNavigate } from 'react-router-dom'
 
 const checkoutFormValidationSchema = zod.object({
   zipcode: zod
@@ -59,9 +60,13 @@ export function CheckoutForm() {
     },
   )
 
+  const navigate = useNavigate()
+
   function handlePostNewOrder(data: FormData) {
     getDeliveryInfo(data)
     reset()
+
+    navigate('/success')
   }
 
   console.log(formState.errors)

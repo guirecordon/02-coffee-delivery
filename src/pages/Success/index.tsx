@@ -1,4 +1,6 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useContext } from 'react'
+import { CartItemsContext } from '../../contexts/CartItemsContext'
 import {
   BulletWrap,
   DollarPinWrapper,
@@ -13,6 +15,8 @@ import {
 } from './styles'
 
 export function Success() {
+  const { deliveryInfo } = useContext(CartItemsContext)
+
   return (
     <SuccessContainer>
       <SuccessLeftSide>
@@ -38,9 +42,15 @@ export function Success() {
                 </TimerPinWrapper>
                 <div>
                   <p>
-                    Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                    Entrega em{' '}
+                    <strong>
+                      {deliveryInfo?.street}, {deliveryInfo?.number}
+                    </strong>
                   </p>
-                  <p>Farrapos - Porto Alegre, RS</p>
+                  <p>
+                    {deliveryInfo?.district} - {deliveryInfo?.city},{' '}
+                    {deliveryInfo?.state}
+                  </p>
                 </div>
               </BulletWrap>
               <BulletWrap>
@@ -50,7 +60,15 @@ export function Success() {
                 <div>
                   <p>Pagamento na entrega</p>
                   <p>
-                    <strong>Cartão de Crédito</strong>
+                    {deliveryInfo?.paymentMethod === 'credit' && (
+                      <strong>Cartão de Crédito</strong>
+                    )}
+                    {deliveryInfo?.paymentMethod === 'debit' && (
+                      <strong>Cartão de Débito</strong>
+                    )}
+                    {deliveryInfo?.paymentMethod === 'cash' && (
+                      <strong>Dinheiro</strong>
+                    )}
                   </p>
                 </div>
               </BulletWrap>
