@@ -2,7 +2,7 @@ import { HeaderContainer, Location, LocationWrap, Pin } from './styles'
 import logo from '../../assets/Logo.svg'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, FormEvent } from 'react'
 import { CartItemsContext } from '../../contexts/CartItemsContext'
 
 export function Header() {
@@ -20,7 +20,8 @@ export function Header() {
     }
   }
 
-  function handleReturnHome() {
+  function handleReturnHome(event: FormEvent) {
+    event.preventDefault()
     navigate('/')
   }
 
