@@ -1,12 +1,24 @@
 import { HeaderContainer, Location, LocationWrap, Pin } from './styles'
 import logo from '../../assets/Logo.svg'
 import { MapPin, ShoppingCart } from 'phosphor-react'
-import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { CartItemsContext } from '../../contexts/CartItemsContext'
 
 export function Header() {
   const { cartQuantity } = useContext(CartItemsContext)
+
+  const navigate = useNavigate()
+
+  function handleRouting() {
+    if (cartQuantity > 0) {
+      navigate('/checkout')
+    } else {
+      alert(
+        'Carrinho está vazio. Escolha seus itens antes de proceder para o pagamento',
+      )
+    }
+  }
 
   return (
     <HeaderContainer>
@@ -19,9 +31,9 @@ export function Header() {
           <Location>Porto Alegre, RS</Location>
         </LocationWrap>
 
-        <NavLink to="/checkout">
-          <ShoppingCart size={22} weight="fill" />
-        </NavLink>
+        <a>
+          <ShoppingCart size={22} weight="fill" onClick={handleRouting} />
+        </a>
         <span>{cartQuantity}</span>
       </nav>
     </HeaderContainer>

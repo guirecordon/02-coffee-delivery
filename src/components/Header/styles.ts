@@ -43,6 +43,7 @@ export const HeaderContainer = styled.header`
     background: ${(props) => props.theme['yellow-light']};
     padding: 0.625rem 0.5rem;
     border-radius: 6px;
+    cursor: pointer;
   }
 `
 
