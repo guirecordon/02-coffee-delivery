@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
 interface CartItem {
@@ -63,6 +63,10 @@ export function CartItemsContextProvider({
       cartItems.reduce((total, currItem) => (total += currItem.quantity), 0),
     )
   }
+
+  useEffect(() => {
+    updateCartQuantity()
+  }, [cartItems])
 
   function getItemQuantity(id: number) {
     return cartItems.find((item) => item.id === id)?.quantity || 0

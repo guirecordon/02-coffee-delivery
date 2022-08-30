@@ -23,7 +23,7 @@ import {
   AddBorderComponent,
   ErrorMessage,
 } from './styles'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { CartItemsContext } from '../../../../contexts/CartItemsContext'
 import { CartItemCart } from './components/CartItemCart'
 import { PriceCheckoutSection } from './components/PriceCheckoutSection'
@@ -72,8 +72,6 @@ export function CheckoutForm() {
     navigate('/success')
     resetCartItems()
   }
-
-  console.log(formState.errors)
 
   const radioInput = watch('paymentMethod')
 

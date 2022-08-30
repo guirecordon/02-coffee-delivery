@@ -1,5 +1,5 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { CartItemsContext } from '../../../../../../contexts/CartItemsContext'
 import coffeeList from '../../../../../../data/coffeeList.json'
 import { Counter } from '../../../../../Home/components/list/components/coffee-card/styles'
@@ -21,14 +21,14 @@ export function CartItemCart({ id, quantity }: CartItemsProps) {
   const {
     increaseCartQuantity,
     decreaseCartQuantity,
-    updateCartQuantity,
-    cartItems,
+    // updateCartQuantity,
+    // cartItems,
     removeItem,
   } = useContext(CartItemsContext)
 
-  useEffect(() => {
-    updateCartQuantity()
-  }, [cartItems, updateCartQuantity])
+  // useEffect(() => {
+  //   updateCartQuantity()
+  // }, [cartItems, updateCartQuantity])
 
   const checkoutItem = coffeeList.find((item: any) => {
     return item.id === id
