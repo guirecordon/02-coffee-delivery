@@ -39,6 +39,7 @@ const checkoutFormValidationSchema = zod.object({
   number: zod.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
     message: 'Campo numérico obrigatório',
   }),
+  complement: zod.string(),
   district: zod.string().min(2, 'Campo obrigatório'),
   city: zod.string().min(2, 'Campo obrigatório'),
   state: zod
@@ -51,7 +52,7 @@ const checkoutFormValidationSchema = zod.object({
 type FormData = zod.infer<typeof checkoutFormValidationSchema>
 
 export function CheckoutForm() {
-  const { cartItems } = useContext(CartItemsContext)
+  const { cartItems, getDeliveryInfo } = useContext(CartItemsContext)
   const { register, handleSubmit, watch, formState, reset } = useForm<FormData>(
     {
       resolver: zodResolver(checkoutFormValidationSchema),
@@ -59,7 +60,7 @@ export function CheckoutForm() {
   )
 
   function handlePostNewOrder(data: FormData) {
-    console.log(data)
+    getDeliveryInfo(data)
     reset()
   }
 

@@ -6,6 +6,16 @@ interface CartItem {
   quantity: number
 }
 
+interface FormData {
+  number: string
+  zipcode: string
+  street: string
+  district: string
+  city: string
+  state: string
+  paymentMethod: string
+}
+
 interface CartItemsContextProviderProps {
   children: ReactNode
 }
@@ -13,11 +23,13 @@ interface CartItemsContextProviderProps {
 type CartItemsContextType = {
   cartItems: CartItem[]
   getItemQuantity: (id: number) => number
+  getDeliveryInfo: (data: FormData) => void
   increaseCartQuantity: (id: number) => void
   decreaseCartQuantity: (id: number) => void
   updateCartQuantity: () => void
   removeItem: (id: number) => void
   cartQuantity: number
+  deliveryInfo: FormData | null
 }
 
 export const CartItemsContext = createContext({} as CartItemsContextType)
@@ -30,6 +42,11 @@ export function CartItemsContextProvider({
     [],
   )
   const [cartQuantity, setCartQuantity] = useState(0)
+  const [deliveryInfo, setDeliveryInfo] = useState<FormData | null>(null)
+
+  function getDeliveryInfo(data: FormData) {
+    setDeliveryInfo(data)
+  }
 
   function updateCartQuantity() {
     setCartQuantity(() =>
@@ -91,6 +108,8 @@ export function CartItemsContextProvider({
         cartQuantity,
         updateCartQuantity,
         removeItem,
+        deliveryInfo,
+        getDeliveryInfo,
       }}
     >
       {children}
