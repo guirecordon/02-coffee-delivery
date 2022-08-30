@@ -66,12 +66,14 @@ export function CheckoutForm() {
   const navigate = useNavigate()
 
   function handlePostNewOrder(data: FormData) {
-    getDeliveryInfo(data)
-    reset()
-    zeroCartQuantity()
+    if (cartItems.length > 0) {
+      getDeliveryInfo(data)
+      reset()
+      zeroCartQuantity()
 
-    navigate('/success')
-    resetCartItems()
+      navigate('/success')
+      resetCartItems()
+    }
   }
 
   const radioInput = watch('paymentMethod')
