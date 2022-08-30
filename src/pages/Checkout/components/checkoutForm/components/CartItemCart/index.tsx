@@ -1,5 +1,5 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { CartItemsContext } from '../../../../../../contexts/CartItemsContext'
 import coffeeList from '../../../../../../data/coffeeList.json'
 import { Counter } from '../../../../../Home/components/list/components/coffee-card/styles'

@@ -24,7 +24,7 @@ import {
   ErrorMessage,
   EmptyCartMessage,
 } from './styles'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { CartItemsContext } from '../../../../contexts/CartItemsContext'
 import { CartItemCart } from './components/CartItemCart'
 import { PriceCheckoutSection } from './components/PriceCheckoutSection'
@@ -60,16 +60,17 @@ export function CheckoutForm() {
     getDeliveryInfo,
     resetCartItems,
     zeroCartQuantity,
-    deliveryInfo,
+    updateCartQuantity,
   } = useContext(CartItemsContext)
   const { register, handleSubmit, watch, formState, reset } = useForm<FormData>(
     {
       resolver: zodResolver(checkoutFormValidationSchema),
-      defaultValues: {
-        zipcode: deliveryInfo?.zipcode,
-      },
     },
   )
+
+  useEffect(() => {
+    updateCartQuantity()
+  }, [cartItems])
 
   const navigate = useNavigate()
 
@@ -85,7 +86,6 @@ export function CheckoutForm() {
   }
 
   const radioInput = watch('paymentMethod')
-  const zip = watch('zipcode')
 
   return (
     <FormContainer onSubmit={handleSubmit(handlePostNewOrder)}>

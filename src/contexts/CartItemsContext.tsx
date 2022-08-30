@@ -67,10 +67,6 @@ export function CartItemsContextProvider({
     )
   }
 
-  useEffect(() => {
-    updateCartQuantity()
-  }, [cartItems])
-
   function getItemQuantity(id: number) {
     return cartItems.find((item) => item.id === id)?.quantity || 0
   }
