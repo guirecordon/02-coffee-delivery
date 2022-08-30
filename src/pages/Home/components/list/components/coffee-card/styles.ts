@@ -78,6 +78,7 @@ export const Counter = styled.div`
 
   border-radius: 6px;
   color: ${(props) => props.theme.purple};
+  cursor: pointer;
 
   :hover {
     color: ${(props) => props.theme['purple-dark']};
@@ -110,4 +111,5 @@ export const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `
