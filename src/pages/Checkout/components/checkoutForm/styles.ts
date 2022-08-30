@@ -151,3 +151,8 @@ export const CheckoutBox = styled.div`
   background: ${(props) => props.theme['base-card']};
   border-radius: 2% 10% / 2% 10%;
 `
+
+export const ErrorMessage = styled.p`
+  color: ${(props) => props.theme['yellow-dark']};
+  font-size: 0.75rem;
+`

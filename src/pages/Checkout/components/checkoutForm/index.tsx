@@ -21,6 +21,7 @@ import {
   CheckoutBox,
   RadioInput,
   AddBorderComponent,
+  ErrorMessage,
 } from './styles'
 import { useContext } from 'react'
 import { CartItemsContext } from '../../../../contexts/CartItemsContext'
@@ -41,8 +42,8 @@ const checkoutFormValidationSchema = zod.object({
     message: 'Campo numérico obrigatório',
   }),
   complement: zod.string(),
-  district: zod.string().min(2, 'Campo obrigatório'),
-  city: zod.string().min(2, 'Campo obrigatório'),
+  district: zod.string().min(2, 'Informe o bairro'),
+  city: zod.string().min(2, 'Informe a cidade'),
   state: zod
     .string()
     .min(2, 'Prencha com um UF válido')
@@ -95,9 +96,7 @@ export function CheckoutForm() {
               pattern: /[0-9]{8}/,
             })}
           />
-          {formState.errors.zipcode && (
-            <p>{formState.errors.zipcode.message}</p>
-          )}
+
           <StreetInput type="text" placeholder="Rua" {...register('street')} />
           <LineOneInput>
             <FormInput
@@ -119,14 +118,24 @@ export function CheckoutForm() {
               placeholder="Bairro"
               {...register('district')}
             />
-            {formState.errors.district && (
-              <p>{formState.errors.district.message}</p>
-            )}
+
             <FormInput type="text" placeholder="Cidade" {...register('city')} />
-            {formState.errors.city && <p>{formState.errors.city.message}</p>}
+
             <FormInput type="text" placeholder="UF" {...register('state')} />
-            {formState.errors.state && <p>{formState.errors.state.message}</p>}
           </LineTwoInput>
+
+          {formState.errors.zipcode && (
+            <ErrorMessage>{formState.errors.zipcode.message}</ErrorMessage>
+          )}
+          {formState.errors.district && (
+            <ErrorMessage>{formState.errors.district.message}</ErrorMessage>
+          )}
+          {formState.errors.city && (
+            <ErrorMessage>{formState.errors.city.message}</ErrorMessage>
+          )}
+          {formState.errors.state && (
+            <ErrorMessage>{formState.errors.state.message}</ErrorMessage>
+          )}
         </FormSection>
         <FormSection>
           <FormHeader>
@@ -173,6 +182,9 @@ export function CheckoutForm() {
               <label htmlFor="cash"></label>
             </PaymentButton>
           </PaymentSelectionHolder>
+          {formState.errors.paymentMethod && (
+            <ErrorMessage>Selecione uma forma de pagamento</ErrorMessage>
+          )}
         </FormSection>
       </div>
       <div>
