@@ -20,9 +20,13 @@ export function Header() {
     }
   }
 
+  function handleReturnHome() {
+    navigate('/')
+  }
+
   return (
     <HeaderContainer>
-      <img src={logo} alt="" />
+      <img src={logo} alt="" onClick={handleReturnHome} />
       <nav>
         <LocationWrap>
           <Pin>
@@ -34,7 +38,7 @@ export function Header() {
         <a>
           <ShoppingCart size={22} weight="fill" onClick={handleRouting} />
         </a>
-        <span>{cartQuantity}</span>
+        {cartQuantity > 0 && <span>{cartQuantity}</span>}
       </nav>
     </HeaderContainer>
   )

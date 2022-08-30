@@ -53,7 +53,7 @@ const checkoutFormValidationSchema = zod.object({
 type FormData = zod.infer<typeof checkoutFormValidationSchema>
 
 export function CheckoutForm() {
-  const { cartItems, getDeliveryInfo, resetCartItems } =
+  const { cartItems, getDeliveryInfo, resetCartItems, zeroCartQuantity } =
     useContext(CartItemsContext)
   const { register, handleSubmit, watch, formState, reset } = useForm<FormData>(
     {
@@ -66,6 +66,7 @@ export function CheckoutForm() {
   function handlePostNewOrder(data: FormData) {
     getDeliveryInfo(data)
     reset()
+    zeroCartQuantity()
 
     navigate('/success')
     resetCartItems()

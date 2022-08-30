@@ -45,6 +45,10 @@ export const HeaderContainer = styled.header`
     border-radius: 6px;
     cursor: pointer;
   }
+
+  img {
+    cursor: pointer;
+  }
 `
 
 export const LocationWrap = styled.div`
