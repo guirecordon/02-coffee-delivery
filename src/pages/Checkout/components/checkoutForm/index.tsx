@@ -205,10 +205,10 @@ export function CheckoutForm() {
         <h3>Cafés selecionados</h3>
         <CheckoutBox>
           <div>
-            {cartItems.length > 0 ? (
-              cartItems.map((item: any) => (
-                <CartItemCart key={item.id} {...item} />
-              ))
+            {cartItems && cartItems.length > 0 ? (
+              cartItems.map((item) => {
+                return <CartItemCart key={item.id} {...item} />
+              })
             ) : (
               <EmptyCartMessage>
                 Seu carrinho está vazio. <br />

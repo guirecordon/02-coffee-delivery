@@ -7,13 +7,14 @@ interface CartItem {
 }
 
 interface FormData {
-  number: string
-  zipcode: string
-  street: string
-  district: string
-  city: string
-  state: string
-  paymentMethod: string
+  number?: string
+  zipcode?: string
+  street?: string
+  complement?: string
+  district?: string
+  city?: string
+  state?: string
+  paymentMethod?: string
 }
 
 interface CartItemsContextProviderProps {
